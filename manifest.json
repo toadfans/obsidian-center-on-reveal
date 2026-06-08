@@ -1,0 +1,11 @@
+{
+	"id": "obplugin",
+	"name": "Obplugin Plugin",
+	"version": "0.0.200",
+	"minAppVersion": "0.15.0",
+	"description": "Demonstrates some of the capabilities of the Obsidian API with obplugin.",
+	"author": "Obsidian",
+	"authorUrl": "https://obsidian.md",
+	"fundingUrl": "https://obsidian.md/pricing",
+	"isDesktopOnly": false
+}

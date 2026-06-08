@@ -1,0 +1,24 @@
+{
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"extends": ["config:recommended", ":dependencyDashboard", ":semanticCommits"],
+	"enabledManagers": ["bun", "github-actions"],
+	"timezone": "Asia/Shanghai",
+	"labels": ["dependencies"],
+	"minimumReleaseAge": "7 days",
+	"internalChecksFilter": "strict",
+	"semanticCommitType": "chore",
+	"semanticCommitScope": "deps",
+	"lockFileMaintenance": {
+		"enabled": true,
+		"schedule": ["before 5am on monday"]
+	},
+	"packageRules": [
+		{
+			"description": "Group non-major dependency updates",
+			"matchManagers": ["bun", "github-actions"],
+			"matchUpdateTypes": ["minor", "patch"],
+			"groupName": "non-major dependencies",
+			"groupSlug": "non-major"
+		}
+	]
+}

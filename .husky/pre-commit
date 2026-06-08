@@ -1,0 +1,47 @@
+bun scripts/version-bump.ts
+git add manifest.json versions.json
+
+version=$(git show :package.json | bun -e "let s=''; process.stdin.on('data', d => s += d); process.stdin.on('end', () => console.log(JSON.parse(s).version))")
+has_notes=$(git show :CHANGELOG.md | awk -v ver="$version" '
+  /^## \[/ { if ($0 ~ ("## \\[" ver "\\]")) found=1 }
+  END { print found ? "1" : "0" }
+')
+
+if [ "$has_notes" != "1" ]; then
+  echo "No CHANGELOG.md section for version $version; skipping release notes check."
+else
+notes=$(git show :CHANGELOG.md | awk -v ver="$version" '
+  /^## \[/ { if (found) exit; if ($0 ~ ("## \\[" ver "\\]")) found=1; next }
+  found { lines[++n] = $0 }
+  END {
+    while (n > 0 && lines[n] ~ /^[[:space:]]*$/) n--
+    i = 1; while (i <= n && lines[i] ~ /^[[:space:]]*$/) i++
+    for (; i <= n; i++) print lines[i]
+  }
+')
+
+  if [ -z "$notes" ]; then
+    echo "No release notes found for version $version in CHANGELOG.md"
+    echo
+    echo "Add release notes under:"
+    echo "  ## [$version]"
+    exit 1
+  fi
+fi
+
+files=$(git diff --cached --name-only --diff-filter=ACMR -- \
+  '*.css' \
+  '*.js' \
+  '*.json' \
+  '*.md' \
+  '*.mts' \
+  '*.ts' \
+  '*.yaml' \
+  '*.yml')
+
+if [ -z "$files" ]; then
+  exit 0
+fi
+
+bunx prettier --write --log-level error $files
+git add -- $files

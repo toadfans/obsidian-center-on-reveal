@@ -1,0 +1,197 @@
+name: Main
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  ci:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Use Node.js 25.x
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25.x
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - run: bun ci
+
+      - run: bun run format:check
+
+      - run: bun run lint
+
+      - run: bun run test
+
+      - run: bun run unused
+
+      - run: bun run build
+
+  docs:
+    name: Docs
+    needs: ci
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref_name == 'main')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v6
+
+      - name: Checkout Starflow
+        uses: actions/checkout@v6
+        with:
+          repository: toadfans/starflow
+          ref: main
+          path: .starflow-action
+          token: ${{ secrets.TOADFANS_PAT }}
+
+      - name: Build docs
+        uses: ./.starflow-action
+        with:
+          output: dist/docs
+          base: /${{ github.event.repository.name }}/
+          publish: true
+          token: ${{ github.token }}
+
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: docs-${{ github.sha }}
+          path: dist/docs
+
+  release:
+    name: Release
+    needs: docs
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref_name == 'main')
+    runs-on: ubuntu-latest
+    permissions:
+      attestations: write
+      artifact-metadata: write
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 25.x
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Get version from package.json
+        id: version
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          echo "version=${VERSION}" >> "$GITHUB_OUTPUT"
+          echo "Version from package.json: ${VERSION}"
+
+      - name: Extract release notes from CHANGELOG.md
+        id: release_notes
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          has_notes=$(awk -v ver="${VERSION}" '
+            /^## \[/ { if ($0 ~ ("## \\[" ver "\\]")) found=1 }
+            END { print found ? "1" : "0" }
+          ' CHANGELOG.md)
+          if [ "$has_notes" != "1" ]; then
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "No CHANGELOG.md section for version ${VERSION}; skipping release."
+            exit 0
+          fi
+
+          notes=$(awk -v ver="${VERSION}" '
+            /^## \[/ { if (found) exit; if ($0 ~ ("## \\[" ver "\\]")) found=1; next }
+            found { lines[++n] = $0 }
+            END {
+              while (n > 0 && lines[n] ~ /^[[:space:]]*$/) n--
+              i = 1; while (i <= n && lines[i] ~ /^[[:space:]]*$/) i++
+              for (; i <= n; i++) print lines[i]
+            }
+          ' CHANGELOG.md)
+          if [ -z "$notes" ]; then
+            echo "Error: No release notes found for version ${VERSION} in CHANGELOG.md" >&2
+            exit 1
+          fi
+          echo "ready=true" >> "$GITHUB_OUTPUT"
+          echo "$notes" > /tmp/release_notes.md
+
+      - name: Check if release exists
+        id: check_release
+        if: steps.release_notes.outputs.ready == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release view "${{ steps.version.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+            echo "Release ${{ steps.version.outputs.version }} already exists, skipping release flow."
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "Release ${{ steps.version.outputs.version }} does not exist, starting release flow."
+          fi
+
+      - name: Install dependencies
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false'
+        run: bun ci
+
+      - name: Build release files
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false'
+        run: bun run build
+
+      - name: Prepare release artifacts
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false'
+        run: |
+          mkdir -p dist/build
+          cp main.js dist/build/
+          cp manifest.json dist/build/
+          cp styles.css dist/build/
+          ls -R dist/build/
+
+      - name: Upload build artifacts
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false'
+        uses: actions/upload-artifact@v7
+        with:
+          name: build-artifacts-${{ steps.version.outputs.version }}
+          path: dist/build/*
+
+      - name: Attest build provenance
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false' && github.event.repository.private == false
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: dist/build/*
+
+      - name: Skip build provenance attestation for non-public repositories
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false' && github.event.repository.private != false
+        run: echo "Skipping build provenance attestation because this repository is not public."
+
+      - name: Create release
+        if: steps.release_notes.outputs.ready == 'true' && steps.check_release.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v3
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Release ${{ steps.version.outputs.version }}
+          draft: false
+          prerelease: false
+          files: dist/build/*
+          body_path: /tmp/release_notes.md
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

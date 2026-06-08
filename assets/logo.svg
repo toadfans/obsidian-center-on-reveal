@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+	<title id="title">Obplugin sample</title>
+	<rect width="256" height="256" rx="48" fill="#111827"/>
+	<polygon points="128,40 147.98,100.49 211.69,100.81 160.34,138.51 179.73,199.19 128,162 76.27,199.19 95.66,138.51 44.31,100.81 108.02,100.49" fill="#f9fafb"/>
+</svg>
