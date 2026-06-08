@@ -2,6 +2,6 @@
 
 ## [Unreleased]
 
-## [0.0.1]
+## [0.1.0]
 
-- bump
+- Implement Center on Reveal.

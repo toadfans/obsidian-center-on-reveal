@@ -1,33 +1,35 @@
 ---
 title: FAQ
 sidebar:
-  order: 40
+  order: 30
 ---
 
 # FAQ
 
-### Why does this template use Bun?
+### Does this replace Obsidian's auto reveal?
 
-The repository pins Bun in `package.json` and uses Bun scripts for install, build, lint, test, and
-format commands. Keep that package manager unless you also replace the scripts and CI workflow.
+No. It enables and reuses Obsidian's built-in file explorer auto reveal, then adjusts the final
+scroll position.
 
-### Why does the template use esbuild?
+### Why does it require Obsidian 1.7.2?
 
-Obsidian community plugins load a single JavaScript entry file. esbuild keeps the build small and
-fast while bundling dependencies into `main.js`.
+The plugin handles deferred sidebar views through `WorkspaceLeaf.isDeferred` and
+`WorkspaceLeaf.loadIfDeferred()`, which are available from Obsidian 1.7.2.
+
+### Does it have settings?
+
+No. v0.1.0 always enables built-in auto reveal, centers the active row, and flashes it.
+
+### Does it move focus away from the editor?
+
+No. It uses the built-in auto reveal path, which reveals the active file without focusing the file
+explorer.
+
+### Why can a row briefly appear near the edge before centering?
+
+Obsidian first scrolls the row into view with its own nearest-edge behavior. Center on Reveal then
+adjusts the same row to the middle. On slower machines, that can be visible for a moment.
 
 ### Which files are release assets?
 
-Attach `manifest.json`, `main.js`, and `styles.css` to each GitHub release. `styles.css` is optional
-only if the plugin has no CSS.
-
-### Should generated files be committed?
-
-Do not commit `node_modules/` or generated build output unless the project explicitly changes that
-policy. Community plugin releases should publish generated assets through GitHub releases.
-
-### How do I test inside Obsidian?
-
-Build the plugin, copy `main.js`, `manifest.json`, and `styles.css` into
-`<vault>/.obsidian/plugins/<plugin-id>/`, reload Obsidian, and enable the plugin under
-**Settings -> Community plugins**.
+Attach `manifest.json` and `main.js` to each GitHub release. There is no `styles.css` in v0.1.0.

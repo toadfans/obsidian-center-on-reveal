@@ -6,10 +6,15 @@ sidebar:
 
 # Getting started
 
-Obsidian Center on Reveal is a starter template for building an Obsidian community plugin with Bun, esbuild,
-TypeScript, tests, linting, release automation, and optional documentation publishing.
+Center on Reveal is an Obsidian community plugin that centers and highlights the active file after
+it is revealed in the file explorer.
 
-## Install
+## Requirements
+
+- Obsidian 1.7.2 or newer.
+- Bun 1.3.14, as pinned in `package.json`.
+
+## Install dependencies
 
 ```bash
 bun install
@@ -26,17 +31,26 @@ This starts esbuild in watch mode and writes the bundled plugin entry to `main.j
 ## Build
 
 ```bash
-bun run build
+bun run build:bundle
 ```
 
-The build bundles `src/main.ts` into `main.js` and then runs the local Obsidian sync script. Use
-`bun run install:vault` when you want the script to install the built files into a configured vault.
+Release assets are `manifest.json` and `main.js`. There is no `styles.css` in v0.1.0.
 
-## Adapt the template
+## Test in Obsidian
 
-1. Update `manifest.json` with the final plugin ID, name, description, author, and minimum Obsidian
-   version.
-2. Update `package.json` to use the same package name and version.
-3. Replace the sample commands, settings, and modal in `src/`.
-4. Replace `assets/logo.svg`, `assets/favicon.svg`, and the docs in this directory.
-5. Keep `main.ts` focused on plugin lifecycle and move feature logic into smaller modules.
+Copy `manifest.json` and `main.js` into:
+
+```text
+<vault>/.obsidian/plugins/center-on-reveal/
+```
+
+Reload Obsidian and enable **Center on Reveal** under **Settings → Community plugins**.
+
+## Verify locally
+
+```bash
+bun test
+bun run lint
+bun run unused
+bun run build:bundle
+```

@@ -6,33 +6,39 @@ sidebar:
 
 # How it works
 
-## Project layout
+## What Obsidian already does
 
-- `src/main.ts` contains plugin lifecycle wiring, command registration, and settings tab setup.
-- `src/settings.ts` contains persisted settings, defaults, and the settings UI.
-- `src/changelog.ts` parses `CHANGELOG.md` for release notes.
-- `src/release-notes-modal.ts` renders release notes inside Obsidian.
-- `scripts/` contains local release and vault-sync helpers.
+Obsidian's file explorer has a built-in auto reveal mode. When the active file changes, Obsidian
+expands parent folders and scrolls the active row into view without moving editor focus.
+
+Center on Reveal keeps that built-in behavior and only adjusts the final presentation.
 
 ## Runtime model
 
-Obsidian loads `main.js` from the plugin folder. During development, esbuild bundles the TypeScript
-source and all runtime dependencies into that single file. Release assets are `main.js`,
-`manifest.json`, and `styles.css`.
+`src/main.ts` only wires the plugin lifecycle. `src/center-on-reveal.ts` contains the reveal,
+centering, and flash logic.
 
-## Settings model
+On layout ready, the plugin finds the first `file-explorer` leaf, loads it if it is deferred, calls
+the internal `setAutoReveal(true)` method, then calls `revealActiveFile()` when available.
 
-The template uses `loadData()` and `saveData()` for persisted plugin settings. It exposes
-`getSettingDefinitions()` for newer Obsidian versions and keeps a `display()` fallback for older
-versions, so plugins generated from the template can support both APIs.
+On every `file-open` event, the plugin waits until the active file row is rendered, centers it inside
+`.nav-files-container`, and applies Obsidian's built-in `is-flashing` class.
 
-## Release notes
+## Centering
 
-The plugin stores the last version that displayed release notes in plugin settings. On layout ready,
-it compares that value to `manifest.version`; if the installed version is newer and release notes are
-enabled, it opens the release notes modal.
+The plugin compares the scroller and active row positions with `getBoundingClientRect()`, then updates
+`scrollTop` so the row midpoint aligns with the file explorer viewport midpoint.
 
-## Documentation
+If the row is not rendered yet, the plugin retries for a few animation frames and then stops.
 
-The GitHub Actions workflow can build this `docs/` directory through Starflow on `workflow_dispatch`
-or on pushes to `main`. Update the workflow `base` value when the repository name changes.
+## Highlighting
+
+The plugin reuses Obsidian's `is-flashing` class. It keeps one timeout, clears the previous flash when
+the active row changes, and forces a reflow only when the same row is flashed again.
+
+## Boundaries
+
+The plugin does not implement its own file tree traversal. Obsidian remains responsible for finding
+the active file, expanding parent folders, and rendering the row.
+
+The plugin has no settings, commands, custom CSS, network calls, or telemetry in v0.1.0.

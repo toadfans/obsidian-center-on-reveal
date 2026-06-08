@@ -1,11 +1,10 @@
 {
-	"id": "obsidian-center-on-reveal",
-	"name": "Obsidian Center on Reveal",
-	"version": "0.0.1",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API with obsidian-center-on-reveal.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"id": "center-on-reveal",
+	"name": "Center on Reveal",
+	"version": "0.1.0",
+	"minAppVersion": "1.7.2",
+	"description": "Centers and highlights the active file when it is revealed in the file explorer.",
+	"author": "Yuhang Shi",
+	"authorUrl": "https://github.com/toadfans",
 	"isDesktopOnly": false
 }

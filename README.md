@@ -1,22 +1,31 @@
 <div align="center">
 
-<img src="assets/logo.svg" width="96" height="96" alt="Obsidian Center on Reveal logo">
+<img src="assets/logo.svg" width="96" height="96" alt="Center on Reveal logo">
 
-# Obsidian Center on Reveal
+# Center on Reveal
 
-[![Main](https://github.com/toadfans/NameGuard/actions/workflows/main.yml/badge.svg)](https://github.com/toadfans/NameGuard/actions/workflows/main.yml)
-[![Obsidian plugin](./assets/plugin.svg)](https://community.obsidian.md/plugins/obsidian-center-on-reveal)
-[![Obsidian minimal version](./assets/min-version.svg)](https://community.obsidian.md/plugins/obsidian-center-on-reveal)
+[![Main](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml/badge.svg)](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml)
 ![License](./assets/license.svg)
 
 </div>
 
-Obsidian Center on Reveal is an Obsidian community plugin template with Bun, esbuild, TypeScript, linting, tests,
-release automation, and docs publishing.
+Center on Reveal keeps Obsidian's file explorer focused on the active file. It uses the built-in
+auto reveal behavior, then centers the revealed row and applies Obsidian's native flash highlight.
+
+## Behavior
+
+- Enables the built-in file explorer auto reveal on startup.
+- Centers the active file row after Obsidian reveals it.
+- Flashes the active file row with the built-in `is-flashing` class.
+- Does not add commands, settings, network calls, telemetry, or custom CSS.
+
+## Requirements
+
+- Obsidian 1.7.2 or newer.
+- File explorer enabled in the left sidebar.
 
 ## Documentation
 
 - [Getting started](docs/getting-started.md)
 - [How it works](docs/how-it-works.md)
-- [Settings reference](docs/settings.md)
 - [FAQ](docs/faq.md)

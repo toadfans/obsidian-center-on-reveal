@@ -163,7 +163,9 @@ jobs:
           mkdir -p dist/build
           cp main.js dist/build/
           cp manifest.json dist/build/
-          cp styles.css dist/build/
+          if [ -f styles.css ]; then
+            cp styles.css dist/build/
+          fi
           ls -R dist/build/
 
       - name: Upload build artifacts
