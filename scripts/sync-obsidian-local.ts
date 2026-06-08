@@ -1,6 +1,6 @@
 import { cpSync, existsSync, mkdirSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 
 const shouldInstall = process.argv.includes('--install');
 const REQUIRED_ARTIFACTS = ['main.js', 'manifest.json'];
@@ -8,6 +8,23 @@ const OPTIONAL_ARTIFACTS = ['styles.css'];
 
 function isCiEnvironment() {
 	return process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+}
+
+function hasObsidianCli() {
+	const result = spawnSync('obsidian', ['version'], {
+		encoding: 'utf8',
+		stdio: ['ignore', 'pipe', 'pipe'],
+	});
+
+	if (result.error === undefined) {
+		return true;
+	}
+
+	if (result.error.code === 'ENOENT') {
+		return false;
+	}
+
+	throw result.error;
 }
 
 function runObsidianCommand(args) {
@@ -27,6 +44,11 @@ function getInstalledPluginIds() {
 
 if (isCiEnvironment()) {
 	console.log('[obsidian-sync] Skipping local vault sync in CI.');
+	process.exit(0);
+}
+
+if (!hasObsidianCli()) {
+	console.log('[obsidian-sync] Skipping local vault sync because obsidian CLI is unavailable.');
 	process.exit(0);
 }
 

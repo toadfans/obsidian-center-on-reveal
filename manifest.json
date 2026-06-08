@@ -1,7 +1,7 @@
 {
 	"id": "center-on-reveal",
 	"name": "Center on Reveal",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minAppVersion": "1.7.2",
 	"description": "Centers and highlights the active file when it is revealed in the file explorer.",
 	"author": "Yuhang Shi",

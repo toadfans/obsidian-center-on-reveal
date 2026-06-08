@@ -1,6 +1,6 @@
 {
 	"name": "center-on-reveal",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "Centers and highlights the active file when it is revealed in the file explorer.",
 	"main": "main.js",
 	"type": "module",
