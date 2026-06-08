@@ -1,0 +1,50 @@
+CHANGELOG.md
+  h_6b23b0021492af 5
+package.json
+  h_6b23b0021492af 3
+  s_605c2d398da493::t_7431e581f61afb 2,4
+src/main.ts
+  s_605c2d398da493::t_7431e581f61afb 4-8,10-11,31,39,53,72,102,111
+  s_605c2d398da493::t_3078d113371c2c 17,19
+src/settings.ts
+  s_605c2d398da493::t_7431e581f61afb 2,4,10,16-17,19,24
+assets/logo.svg
+  s_605c2d398da493::t_7431e581f61afb 2
+assets/favicon.svg
+  s_605c2d398da493::t_7431e581f61afb 2
+src/release-notes-modal.ts
+  s_605c2d398da493::t_7431e581f61afb 2,14,21,59-61
+manifest.json
+  s_605c2d398da493::t_7431e581f61afb 2-4,6
+scripts/version-bump.test.ts
+  s_605c2d398da493::t_7431e581f61afb 13
+README.md
+  s_605c2d398da493::t_7431e581f61afb 3,5,8-9,14
+versions.json
+  h_6b23b0021492af 2
+docs/settings.md
+  s_605c2d398da493::t_7431e581f61afb 9,18
+docs/getting-started.md
+  s_605c2d398da493::t_7431e581f61afb 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "a168655ea6b527412e1364f1baf5ce7bf0570f8c",
+  "prompts": {},
+  "humans": {
+    "h_6b23b0021492af": {
+      "author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_605c2d398da493": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ea619-b198-7ac0-868d-c1ddc08bcd5c",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  }
+}
