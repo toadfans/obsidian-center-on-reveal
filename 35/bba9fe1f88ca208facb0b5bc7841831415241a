@@ -1,0 +1,32 @@
+manifest.json
+  s_56539ded5835ad::t_7a16edab5206fa 4
+CHANGELOG.md
+  h_6b23b0021492af 5-8
+scripts/sync-obsidian-local.ts
+  h_6b23b0021492af 3,13-29,50-54
+versions.json
+  s_56539ded5835ad::t_7a16edab5206fa 2
+package.json
+  h_6b23b0021492af 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "35bba9fe1f88ca208facb0b5bc7841831415241a",
+  "prompts": {},
+  "humans": {
+    "h_6b23b0021492af": {
+      "author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_56539ded5835ad": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ea61e-d985-7240-a155-2921a21cb319",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  }
+}
