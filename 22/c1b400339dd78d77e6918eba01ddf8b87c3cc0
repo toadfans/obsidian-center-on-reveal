@@ -1,0 +1,63 @@
+src/center-on-reveal.ts
+  s_56539ded5835ad::t_991b0ab8404a41 141
+  s_56539ded5835ad::t_534e47b4b8d9d4 7
+  s_56539ded5835ad::t_1c2de9d7e6a9aa 1,3-6,8,10-14,37-41,44,46-67,69-77,79-81,83-85,88-96,99-100,103-113,115-118,121-123,125-126,128-131,133,138-140,142
+  s_56539ded5835ad::t_22caab0556fb2f 33-34,45,134
+  s_56539ded5835ad::t_d4e751121a8ad0 15-32,42-43,82,137,143
+src/center-on-reveal.test.ts
+  s_56539ded5835ad::t_22caab0556fb2f 1,60-63,65,67-68,72-81,85,89,111-112,122,128,139,150
+  s_56539ded5835ad::t_534e47b4b8d9d4 2-9
+  s_56539ded5835ad::t_04ba2b5954fe23 10-19,22-23,25-29,32-39,42-43,46-48,51-53,55,57,64,66,69-71,82-84,86-88,90-92,95-98,100-110,113-120,124,127,129,131-135,138,140-149,151-153,155
+scripts/version-bump.test.ts
+  s_56539ded5835ad::t_ef051020ea03be 13,17,19,29,32
+README.md
+  s_56539ded5835ad::t_7a83ecd2d51084 3,5,7,12-21
+  s_56539ded5835ad::t_bcd0ae615e4044 22-25
+package.json
+  s_56539ded5835ad::t_7a16edab5206fa 2-4
+assets/logo.svg
+  s_56539ded5835ad::t_92cfb4a89c8245 2
+docs/faq.md
+  s_56539ded5835ad::t_b98c0db647288f 4,9,11-12,14,16-17,19-21,33,35
+  s_56539ded5835ad::t_bcd0ae615e4044 23,25-26,28,30-32
+manifest.json
+  s_56539ded5835ad::t_7a16edab5206fa 2-8
+versions.json
+  s_56539ded5835ad::t_7a16edab5206fa 2
+CHANGELOG.md
+  s_56539ded5835ad::t_fd88700cd4627b 5,7
+docs/how-it-works.md
+  s_56539ded5835ad::t_bcd0ae615e4044 9,11-14,26-30,32,34,36-37
+  s_56539ded5835ad::t_b98c0db647288f 18-25,39,41-42,44
+docs/getting-started.md
+  s_56539ded5835ad::t_b98c0db647288f 9-10,17,34,37-39,41-45,48
+  s_56539ded5835ad::t_bcd0ae615e4044 12-16,47,49-56
+assets/favicon.svg
+  s_56539ded5835ad::t_92cfb4a89c8245 2
+src/main.ts
+  s_56539ded5835ad::t_ac05c4ae5287a6 8
+  s_56539ded5835ad::t_a04908f7f6d8ca 1-2,4-6,9,11-13,16,19-21
+.github/workflows/main.yml
+  s_56539ded5835ad::t_9381b3d773fcad 166-168
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "22c1b400339dd78d77e6918eba01ddf8b87c3cc0",
+  "prompts": {},
+  "humans": {
+    "h_6b23b0021492af": {
+      "author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  },
+  "sessions": {
+    "s_56539ded5835ad": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ea61e-d985-7240-a155-2921a21cb319",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  }
+}
