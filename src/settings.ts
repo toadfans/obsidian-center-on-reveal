@@ -1,27 +1,27 @@
 import { PluginSettingTab, Setting, type App, type SettingDefinitionItem } from 'obsidian';
-import ObpluginPlugin from './main';
+import ObsidianCenterOnRevealPlugin from './main';
 
-export interface ObpluginPluginSettings {
+export interface ObsidianCenterOnRevealPluginSettings {
 	mySetting: string;
 	previousRelease: string;
 	showReleaseNotes: boolean;
 }
 
-export const DEFAULT_SETTINGS: ObpluginPluginSettings = {
+export const DEFAULT_SETTINGS: ObsidianCenterOnRevealPluginSettings = {
 	mySetting: 'default',
 	previousRelease: '',
 	showReleaseNotes: true,
 };
 
-export class ObpluginSettingTab extends PluginSettingTab {
-	plugin: ObpluginPlugin;
+export class ObsidianCenterOnRevealSettingTab extends PluginSettingTab {
+	plugin: ObsidianCenterOnRevealPlugin;
 
-	constructor(app: App, plugin: ObpluginPlugin) {
+	constructor(app: App, plugin: ObsidianCenterOnRevealPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
 	}
 
-	getSettingDefinitions(): SettingDefinitionItem<keyof ObpluginPluginSettings>[] {
+	getSettingDefinitions(): SettingDefinitionItem<keyof ObsidianCenterOnRevealPluginSettings>[] {
 		return [
 			{
 				name: 'Secret demo',

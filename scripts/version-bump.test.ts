@@ -10,7 +10,7 @@ test('syncs manifest and versions to package version', () => {
 
 	writeFileSync(
 		join(dir, 'package.json'),
-		JSON.stringify({ name: 'obplugin', version: '0.0.2' }, null, '\t'),
+		JSON.stringify({ name: 'obsidian-center-on-reveal', version: '0.0.2' }, null, '\t'),
 	);
 	writeFileSync(
 		join(dir, 'manifest.json'),

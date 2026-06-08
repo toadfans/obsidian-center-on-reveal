@@ -6,7 +6,7 @@ sidebar:
 
 # Getting started
 
-Obplugin is a starter template for building an Obsidian community plugin with Bun, esbuild,
+Obsidian Center on Reveal is a starter template for building an Obsidian community plugin with Bun, esbuild,
 TypeScript, tests, linting, release automation, and optional documentation publishing.
 
 ## Install

@@ -1,18 +1,22 @@
 import { App, Editor, MarkdownFileInfo, MarkdownView, Modal, Notice, Plugin } from 'obsidian';
 import { isVersionNewerThanOther } from './changelog';
 import { ReleaseNotesModal } from './release-notes-modal';
-import { DEFAULT_SETTINGS, ObpluginPluginSettings, ObpluginSettingTab } from './settings';
+import {
+	DEFAULT_SETTINGS,
+	ObsidianCenterOnRevealPluginSettings,
+	ObsidianCenterOnRevealSettingTab,
+} from './settings';
 
-export default class ObpluginPlugin extends Plugin {
-	settings!: ObpluginPluginSettings;
+export default class ObsidianCenterOnRevealPlugin extends Plugin {
+	settings!: ObsidianCenterOnRevealPluginSettings;
 
 	async onload() {
 		await this.loadSettings();
 
 		// This creates an icon in the left ribbon.
-		this.addRibbonIcon('dice', 'Obplugin', (evt: MouseEvent) => {
+		this.addRibbonIcon('dice', 'Obsidian center on reveal', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
-			new Notice('This is an obplugin notice!');
+			new Notice('This is an Obsidian-center-on-reveal notice!');
 		});
 
 		// This adds a status bar item to the bottom of the app. Does not work on mobile apps.
@@ -24,7 +28,7 @@ export default class ObpluginPlugin extends Plugin {
 			id: 'open-modal-simple',
 			name: 'Open modal (simple)',
 			callback: () => {
-				new ObpluginModal(this.app).open();
+				new ObsidianCenterOnRevealModal(this.app).open();
 			},
 		});
 		// This adds an editor command that can perform some operation on the current editor instance
@@ -32,7 +36,7 @@ export default class ObpluginPlugin extends Plugin {
 			id: 'replace-selected',
 			name: 'Replace selected content',
 			editorCallback: (editor: Editor, view: MarkdownView | MarkdownFileInfo) => {
-				editor.replaceSelection('Obplugin editor command');
+				editor.replaceSelection('Obsidian Center on Reveal editor command');
 			},
 		});
 		// This adds a complex command that can check whether the current state of the app allows execution of the command
@@ -46,7 +50,7 @@ export default class ObpluginPlugin extends Plugin {
 					// If checking is true, we're simply "checking" if the command can be run.
 					// If checking is false, then we want to actually perform the operation.
 					if (!checking) {
-						new ObpluginModal(this.app).open();
+						new ObsidianCenterOnRevealModal(this.app).open();
 					}
 
 					// This command will only show up in Command Palette when the check function returns true
@@ -65,7 +69,7 @@ export default class ObpluginPlugin extends Plugin {
 		});
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new ObpluginSettingTab(this.app, this));
+		this.addSettingTab(new ObsidianCenterOnRevealSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
@@ -95,7 +99,7 @@ export default class ObpluginPlugin extends Plugin {
 		this.settings = Object.assign(
 			{},
 			DEFAULT_SETTINGS,
-			(await this.loadData()) as Partial<ObpluginPluginSettings>,
+			(await this.loadData()) as Partial<ObsidianCenterOnRevealPluginSettings>,
 		);
 	}
 
@@ -104,7 +108,7 @@ export default class ObpluginPlugin extends Plugin {
 	}
 }
 
-class ObpluginModal extends Modal {
+class ObsidianCenterOnRevealModal extends Modal {
 	constructor(app: App) {
 		super(app);
 	}

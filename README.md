@@ -1,17 +1,17 @@
 <div align="center">
 
-<img src="assets/logo.svg" width="96" height="96" alt="Obplugin logo">
+<img src="assets/logo.svg" width="96" height="96" alt="Obsidian Center on Reveal logo">
 
-# Obplugin
+# Obsidian Center on Reveal
 
 [![Main](https://github.com/toadfans/NameGuard/actions/workflows/main.yml/badge.svg)](https://github.com/toadfans/NameGuard/actions/workflows/main.yml)
-[![Obsidian plugin](./assets/plugin.svg)](https://community.obsidian.md/plugins/obplugin)
-[![Obsidian minimal version](./assets/min-version.svg)](https://community.obsidian.md/plugins/obplugin)
+[![Obsidian plugin](./assets/plugin.svg)](https://community.obsidian.md/plugins/obsidian-center-on-reveal)
+[![Obsidian minimal version](./assets/min-version.svg)](https://community.obsidian.md/plugins/obsidian-center-on-reveal)
 ![License](./assets/license.svg)
 
 </div>
 
-Obplugin is an Obsidian community plugin template with Bun, esbuild, TypeScript, linting, tests,
+Obsidian Center on Reveal is an Obsidian community plugin template with Bun, esbuild, TypeScript, linting, tests,
 release automation, and docs publishing.
 
 ## Documentation

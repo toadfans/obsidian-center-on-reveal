@@ -6,7 +6,7 @@ sidebar:
 
 # Settings reference
 
-The template ships with two sample settings under **Settings -> Obplugin Plugin**.
+The template ships with two sample settings under **Settings -> Obsidian Center on Reveal**.
 
 | Setting                                  | Default   | What it does                                                      |
 | ---------------------------------------- | --------- | ----------------------------------------------------------------- |
@@ -15,7 +15,7 @@ The template ships with two sample settings under **Settings -> Obplugin Plugin*
 
 ## Adding settings
 
-1. Add the property to `ObpluginPluginSettings`.
+1. Add the property to `ObsidianCenterOnRevealPluginSettings`.
 2. Add its default value to `DEFAULT_SETTINGS`.
 3. Add a matching definition in `getSettingDefinitions()`.
 4. Add the same control to `display()` if the plugin still supports older Obsidian versions.

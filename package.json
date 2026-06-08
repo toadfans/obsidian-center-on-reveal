@@ -1,7 +1,7 @@
 {
-	"name": "obplugin",
-	"version": "0.0.200",
-	"description": "This is the obplugin plugin for Obsidian (https://obsidian.md)",
+	"name": "obsidian-center-on-reveal",
+	"version": "0.0.1",
+	"description": "This is the obsidian-center-on-reveal plugin for Obsidian (https://obsidian.md)",
 	"main": "main.js",
 	"type": "module",
 	"packageManager": "bun@1.3.14",
