@@ -1,0 +1,12 @@
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "41dca38cc7198202598da9d9ffcc5c34b09adc8c",
+  "prompts": {},
+  "humans": {
+    "h_6b23b0021492af": {
+      "author": "Yuhang Shi <toadfanszz@gmail.com>"
+    }
+  }
+}
