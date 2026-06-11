@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+	<title id="title">Center on Reveal</title>
+	<rect width="64" height="64" rx="14" fill="#111827"/>
+	<polygon points="32,10 37,25.12 52.92,25.2 40.08,34.63 44.93,49.8 32,40.5 19.07,49.8 23.92,34.63 11.08,25.2 27,25.12" fill="#f9fafb"/>
+</svg>
