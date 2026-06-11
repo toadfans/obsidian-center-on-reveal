@@ -4,7 +4,7 @@
 
 # Center on Reveal
 
-[![Main](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml/badge.svg)](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml) [![Obsidian plugin](./assets/plugin.svg)](https://community.obsidian.md/plugins/center-on-reveal) [![Obsidian minimal version](./assets/min-version.svg)](https://community.obsidian.md/plugins/center-on-reveal) ![License](./assets/license.svg)
+[![Main](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml/badge.svg)](https://github.com/toadfans/obsidian-center-on-reveal/actions/workflows/main.yml) [![Obsidian plugin](https://raw.githubusercontent.com/wiki/toadfans/obsidian-center-on-reveal/assets/plugin.svg)](https://community.obsidian.md/plugins/center-on-reveal) [![Obsidian minimal version](https://raw.githubusercontent.com/wiki/toadfans/obsidian-center-on-reveal/assets/min-version.svg)](https://community.obsidian.md/plugins/center-on-reveal) ![License](https://raw.githubusercontent.com/wiki/toadfans/obsidian-center-on-reveal/assets/license.svg)
 
 </div>
 
